@@ -10,9 +10,7 @@ services:
     depends_on:
       - db
     environment:
-      - FLASK_APP=app.main
-      - FLASK_ENV=development
-      - DATABASE_URL=postgresql://user:password@db:5432/magicdb
+      DATABASE_URL: ${DATABASE_URL}
     command: python main.py
 
   db:
@@ -20,9 +18,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: magicdb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
 
 volumes:
   postgres_data:

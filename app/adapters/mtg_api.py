@@ -1,8 +1,9 @@
 import requests
 
+from app.interfaces.mtg_api_interface import MTGApiInterface
 from app.domain.models import CardData
 
-class MTGApiAdapter:
+class MTGApiAdapter(MTGApiInterface):
 
     def __init__(self) -> None:
         self.base_url = "https://api.magicthegathering.io/v1/cards"
@@ -15,7 +16,7 @@ class MTGApiAdapter:
         else:
             raise Exception("Error to fetch Magic api url to get all cards")
         
-    def get_standard_english_cards(self):
+    def get_standard_cards(self):
         params = {
             'gameFormat': 'Standard'
         }
